@@ -1,0 +1,62 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Atelier Object — The watch as living sculpture",
+  description =
+    "A singular timepiece encounter. Precision, material, and human craft — request a private viewing.",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#141414" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,300;0,400;0,500;1,400&family=Public+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <title>{title}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  .skip-link {
+    position: absolute;
+    left: var(--page-pad);
+    top: -100px;
+    z-index: var(--z-focus);
+    padding: var(--space-3) var(--space-4);
+    background: var(--color-ink);
+    color: var(--color-bg);
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    font-size: var(--text-label);
+    text-decoration: none;
+    transition: top var(--duration-fast) var(--ease-out-quart);
+  }
+
+  .skip-link:focus {
+    top: var(--space-4);
+  }
+</style>

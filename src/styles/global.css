@@ -1,0 +1,162 @@
+/* Atelier Object — Warm Stage tokens (OKLCH, dark only) */
+:root {
+  /* Stage */
+  --color-bg: oklch(0.08 0 0);
+  --color-surface: oklch(0.14 0.01 55);
+  --color-surface-lift: oklch(0.18 0.014 55);
+  --color-ink: oklch(0.95 0.012 75);
+  --color-muted: oklch(0.72 0.025 60);
+  --color-faint: oklch(0.48 0.02 55);
+
+  /* Warm metal — ≤10% of any view */
+  --color-primary: oklch(0.68 0.13 58);
+  --color-primary-deep: oklch(0.52 0.12 52);
+  --color-accent: oklch(0.42 0.09 40);
+  --color-on-primary: oklch(0.99 0.005 75);
+
+  --chapter-wash: oklch(0.08 0 0 / 0.28);
+  --chapter-rule: oklch(0.95 0.012 75 / 0.14);
+  --chapter-watermark: oklch(0.95 0.012 75 / 0.05);
+  --glass: oklch(0.1 0.01 55 / 0.42);
+  --glass-border: oklch(0.95 0.012 75 / 0.12);
+  --topbar-border: oklch(0.95 0.012 75 / 0.22);
+
+  --shadow-soft: 0 18px 50px oklch(0.05 0 0 / 0.35);
+  --selection-bg: oklch(0.68 0.13 58 / 0.35);
+  --text-shadow-hero: 0 1px 24px oklch(0.05 0 0 / 0.55);
+
+  /* Type */
+  --font-display: "Petrona", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --font-body: "Public Sans", "Segoe UI", system-ui, sans-serif;
+
+  --text-display: clamp(2.75rem, 6.5vw, 5.25rem);
+  --text-headline: clamp(1.5rem, 2.8vw, 2rem);
+  --text-body: clamp(1rem, 0.95rem + 0.2vw, 1.125rem);
+  --text-label: 0.8125rem;
+
+  --leading-display: 1.05;
+  --leading-body: 1.65;
+
+  --tracking-display: -0.02em;
+  --tracking-label: 0.04em;
+
+  /* Space */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4.5rem;
+  --space-9: 7rem;
+
+  --page-pad: clamp(1.25rem, 4vw, 3.5rem);
+  --content-max: 40rem;
+
+  /* Shape */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-pill: 999px;
+
+  /* Motion */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --duration-fast: 180ms;
+  --duration-med: 420ms;
+  --duration-slow: 900ms;
+
+  /* Z */
+  --z-canvas: 0;
+  --z-scrim: 1;
+  --z-ui: 2;
+  --z-nav: 3;
+  --z-focus: 4;
+
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--selection-bg);
+  color: var(--color-ink);
+}
+
+/* Reduced motion: kill continuous + entrance choreography */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,1215 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const chapters = [
+  {
+    id: "case",
+    index: "01",
+    title: "The case, brushed once",
+    body: "Steel is worked in a single direction so the grain catches light like cloth. No circular swirl — only a quiet path for the hand to read.",
+    detail: "41 mm · satin finish",
+    align: "left" as const,
+  },
+  {
+    id: "bezel",
+    index: "02",
+    title: "Brass that keeps its warmth",
+    body: "The bezel is left with a living metal tone — not mirror chrome. Warmth is a finish choice, not a filter on a photograph.",
+    detail: "Hand-turned brass ring",
+    align: "right" as const,
+  },
+  {
+    id: "dial",
+    index: "03",
+    title: "A face meant to be met",
+    body: "Markers sit with deliberate weight. Hands move through a dark field so time is felt before it is read — presence over spectacle.",
+    detail: "Dark dial · brass indices",
+    align: "left" as const,
+  },
+  {
+    id: "crown",
+    index: "04",
+    title: "Where the hand still enters",
+    body: "The crown is the last human interface. Ridged for grip, placed for ritual. Winding is not a setting — it is a conversation with the piece.",
+    detail: "Signed crown · push-set",
+    align: "right" as const,
+  },
+];
+---
+
+<Layout>
+  <div class="experience" data-experience id="experience">
+    <!-- Sticky 3D stage -->
+    <div class="stage-pin" data-stage-pin>
+      <canvas
+        id="watch-canvas"
+        class="stage-pin__canvas"
+        aria-label="Interactive three-dimensional model of a luxury timepiece that responds to scroll"
+        role="img"
+      ></canvas>
+
+      <!-- Vertical progress (desktop) -->
+      <div class="story-progress" data-story-progress aria-hidden="true">
+        <div class="story-progress__track">
+          <div class="story-progress__fill" data-progress-fill></div>
+        </div>
+        <ol class="story-progress__steps">
+          {
+            chapters.map((c, i) => (
+              <li class="story-progress__step" data-rail-item={i}>
+                <span class="story-progress__num">{c.index}</span>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </div>
+
+    <header class="topbar">
+      <a class="topbar__mark" href="/" aria-label="Atelier Object home">
+        <span class="topbar__glyph" aria-hidden="true"></span>
+        Atelier Object
+      </a>
+      <nav class="topbar__nav" aria-label="Primary">
+        <a href="#craft">Craft</a>
+        <a class="topbar__cta" href="#viewing">Private viewing</a>
+      </nav>
+    </header>
+
+    <div class="experience__scroll">
+      <main id="main">
+        <!-- HERO -->
+        <section class="hero" data-hero aria-labelledby="hero-title">
+          <div class="hero__copy">
+            <p class="hero__kicker">Limited atelier series · No. 07</p>
+            <h1 class="hero__title" id="hero-title">
+              Form held<br />
+              <em>in time</em>
+            </h1>
+            <p class="hero__lede">
+              A singular timepiece encountered as living sculpture — steel, brass,
+              and the maker’s hand, lit for the quiet room where craft is still felt.
+            </p>
+            <div class="hero__actions">
+              <a class="btn btn--primary" href="#viewing">Request a private viewing</a>
+              <a class="btn btn--ghost" href="#craft">Read the craft story</a>
+            </div>
+            <p class="hero__hint" data-motion-hint>
+              Scroll to walk the piece · move the cursor to study it
+            </p>
+          </div>
+
+          <aside class="hero__meta" aria-label="Object details">
+            <dl class="spec">
+              <div>
+                <dt>Case</dt>
+                <dd>41&nbsp;mm · brushed steel</dd>
+              </div>
+              <div>
+                <dt>Bezel</dt>
+                <dd>Warm brass, hand-finished</dd>
+              </div>
+              <div>
+                <dt>Edition</dt>
+                <dd>Twelve pieces</dd>
+              </div>
+            </dl>
+          </aside>
+
+          <a class="hero__scroll-cue" href="#craft" data-scroll-cue>
+            <span>Enter the craft</span>
+            <span class="hero__scroll-cue-line" aria-hidden="true"></span>
+          </a>
+        </section>
+
+        <!-- STORY -->
+        <section id="craft" class="story" data-story aria-labelledby="craft-title">
+          <header class="story__intro">
+            <div class="story__intro-inner">
+              <p class="story__eyebrow">The making</p>
+              <h2 id="craft-title" class="story__intro-title">Made to be understood</h2>
+              <p class="story__intro-lede">
+                Four studies. The camera holds each surface long enough for light to
+                do the explaining — case, bezel, dial, crown.
+              </p>
+            </div>
+          </header>
+
+          <div class="story__chapters">
+            {
+              chapters.map((c, i) => (
+                <article
+                  class:list={["chapter", `chapter--${c.align}`]}
+                  id={`chapter-${c.id}`}
+                  data-chapter
+                  data-chapter-index={i}
+                  data-align={c.align}
+                  aria-labelledby={`chapter-title-${c.id}`}
+                >
+                  <div class="chapter__layout">
+                    <div class="chapter__copy">
+                      <p class="chapter__index" aria-hidden="true">
+                        <span class="chapter__index-num">{c.index}</span>
+                        <span class="chapter__index-rule"></span>
+                      </p>
+                      <h3 class="chapter__title" id={`chapter-title-${c.id}`}>
+                        {c.title}
+                      </h3>
+                      <p class="chapter__body">{c.body}</p>
+                      <p class="chapter__detail">{c.detail}</p>
+                    </div>
+                    <!-- Empty column keeps object space open on the opposite side -->
+                    <div class="chapter__stage-gap" aria-hidden="true"></div>
+                  </div>
+                </article>
+              ))
+            }
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <section id="viewing" class="panel panel--invite" aria-labelledby="viewing-title">
+    <div class="panel__inner">
+      <h2 id="viewing-title" class="panel__title">Private viewing</h2>
+      <p class="panel__body">
+        Viewings are by appointment in the atelier or by secure remote session.
+        We keep the list short so each conversation can be unhurried.
+      </p>
+      <a
+        class="btn btn--primary"
+        href="mailto:viewing@atelier-object.example?subject=Private%20viewing%20request"
+      >
+        Write to the atelier
+      </a>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <p>Atelier Object · Object first. Invitation over pressure.</p>
+  </footer>
+</Layout>
+
+<style>
+  /* ========== Experience shell ========== */
+  .experience {
+    position: relative;
+    background: var(--color-bg);
+  }
+
+  .stage-pin {
+    position: sticky;
+    top: 0;
+    height: 100svh;
+    width: 100%;
+    z-index: var(--z-canvas);
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .stage-pin__canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    pointer-events: none;
+  }
+
+  .experience__scroll {
+    position: relative;
+    z-index: var(--z-ui);
+    margin-top: -100svh;
+    pointer-events: none;
+  }
+
+  .experience__scroll a,
+  .experience__scroll button,
+  .experience__scroll .chapter__copy,
+  .experience__scroll .hero__meta,
+  .experience__scroll .hero__copy,
+  .experience__scroll .story__intro-inner {
+    pointer-events: auto;
+  }
+
+  /* ========== Progress rail ========== */
+  .story-progress {
+    position: absolute;
+    right: var(--page-pad);
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    display: flex;
+    align-items: stretch;
+    gap: 0.75rem;
+    opacity: 0;
+    transition: opacity 0.5s var(--ease-out-quart);
+    pointer-events: none;
+  }
+
+  .experience[data-phase="story"] .story-progress {
+    opacity: 1;
+  }
+
+  .story-progress__track {
+    position: relative;
+    width: 1px;
+    background: color-mix(in oklch, var(--color-ink) 14%, transparent);
+    border-radius: 1px;
+    align-self: stretch;
+    min-height: 9rem;
+  }
+
+  .story-progress__fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--color-primary);
+    border-radius: 1px;
+    transform: scaleY(0);
+    transform-origin: top center;
+    will-change: transform;
+    transition: transform 0.25s linear;
+  }
+
+  .story-progress__steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 9rem;
+  }
+
+  .story-progress__step {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: var(--color-faint);
+    transition: color 0.4s var(--ease-out-quart);
+  }
+
+  .story-progress__step.is-active {
+    color: var(--color-primary);
+  }
+
+  .story-progress__step.is-passed {
+    color: var(--color-muted);
+  }
+
+  /* ========== Topbar ========== */
+  .topbar {
+    position: fixed;
+    z-index: var(--z-nav);
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-5);
+    padding: var(--space-5) var(--page-pad);
+    pointer-events: none;
+  }
+
+  .topbar a,
+  .topbar button {
+    pointer-events: auto;
+  }
+
+  .topbar__mark {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    text-decoration: none;
+    color: var(--color-ink);
+  }
+
+  .topbar__glyph {
+    width: 0.65rem;
+    height: 0.65rem;
+    border-radius: 50%;
+    background: var(--color-primary);
+    box-shadow: 0 0 0 1px color-mix(in oklch, var(--color-ink) 15%, transparent);
+  }
+
+
+  .topbar__nav {
+    display: flex;
+    align-items: center;
+    gap: clamp(1rem, 3vw, 2rem);
+    font-size: var(--text-label);
+    font-weight: 500;
+  }
+
+  .topbar__nav a {
+    text-decoration: none;
+    color: var(--color-muted);
+    transition: color var(--duration-fast) var(--ease-out-quart);
+  }
+
+  .topbar__nav a:hover {
+    color: var(--color-ink);
+  }
+
+  .topbar__cta {
+    color: var(--color-ink) !important;
+    padding: 0.55rem 0.95rem;
+    border: 1px solid var(--topbar-border);
+    border-radius: var(--radius-pill);
+    transition:
+      border-color var(--duration-fast) var(--ease-out-quart),
+      background var(--duration-fast) var(--ease-out-quart);
+  }
+
+  .topbar__cta:hover {
+    border-color: color-mix(in oklch, var(--color-primary) 70%, transparent);
+    background: color-mix(in oklch, var(--color-primary) 8%, transparent);
+  }
+
+  /* ========== Hero ========== */
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    align-items: end;
+    gap: var(--space-6);
+    padding:
+      calc(var(--space-8) + 1rem)
+      var(--page-pad)
+      clamp(2.5rem, 8vh, 5rem);
+  }
+
+  .hero__copy {
+    max-width: var(--content-max);
+    padding-bottom: var(--space-4);
+  }
+
+  .hero__kicker {
+    margin: 0 0 var(--space-4);
+    font-size: var(--text-label);
+    font-weight: 500;
+    letter-spacing: var(--tracking-label);
+    color: var(--color-muted);
+  }
+
+  .hero__title {
+    margin: 0 0 var(--space-5);
+    font-family: var(--font-display);
+    font-size: var(--text-display);
+    font-weight: 300;
+    line-height: var(--leading-display);
+    letter-spacing: var(--tracking-display);
+    text-wrap: balance;
+    color: var(--color-ink);
+    text-shadow: var(--text-shadow-hero);
+  }
+
+  .hero__title em {
+    font-style: italic;
+    font-weight: 400;
+    color: color-mix(in oklch, var(--color-primary) 62%, var(--color-ink));
+  }
+
+  .hero__lede {
+    margin: 0 0 var(--space-6);
+    max-width: 36ch;
+    color: var(--color-muted);
+    font-size: clamp(1.02rem, 0.98rem + 0.25vw, 1.15rem);
+    line-height: 1.7;
+    text-wrap: pretty;
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-bottom: var(--space-5);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 3rem;
+    padding: 0.85rem 1.45rem;
+    border-radius: var(--radius-pill);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    text-decoration: none;
+    transition:
+      transform var(--duration-med) var(--ease-out-expo),
+      background var(--duration-med) var(--ease-out-quart),
+      border-color var(--duration-med) var(--ease-out-quart),
+      box-shadow var(--duration-med) var(--ease-out-quart),
+      color var(--duration-med) var(--ease-out-quart);
+  }
+
+  .btn--primary {
+    background: var(--color-primary);
+    color: var(--color-on-primary);
+    box-shadow: 0 10px 30px color-mix(in oklch, var(--color-primary) 28%, transparent);
+  }
+
+  .btn--primary:hover {
+    background: color-mix(in oklch, var(--color-primary) 88%, white);
+    color: var(--color-on-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 14px 36px color-mix(in oklch, var(--color-primary) 35%, transparent);
+  }
+
+  .btn--primary:active {
+    transform: translateY(0);
+  }
+
+  .btn--ghost {
+    color: var(--color-ink);
+    border: 1px solid var(--topbar-border);
+    background: var(--glass);
+    backdrop-filter: blur(8px);
+  }
+
+  .btn--ghost:hover {
+    border-color: color-mix(in oklch, var(--color-ink) 35%, transparent);
+    background: color-mix(in oklch, var(--color-surface) 70%, transparent);
+  }
+
+  .hero__hint {
+    margin: 0;
+    font-size: 0.78rem;
+    letter-spacing: 0.03em;
+    color: var(--color-faint);
+  }
+
+  .hero__meta {
+    justify-self: end;
+    align-self: end;
+    width: min(100%, 16rem);
+    padding: var(--space-5);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    background: var(--glass);
+    backdrop-filter: blur(12px);
+  }
+
+  .spec {
+    margin: 0;
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .spec div {
+    display: grid;
+    gap: 0.2rem;
+  }
+
+  .spec dt {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-faint);
+  }
+
+  .spec dd {
+    margin: 0;
+    font-size: 0.92rem;
+    color: var(--color-ink);
+  }
+
+  .hero__scroll-cue {
+    position: absolute;
+    left: var(--page-pad);
+    bottom: clamp(1.25rem, 4vh, 2.5rem);
+    display: inline-flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--color-faint);
+    transition: color var(--duration-fast) var(--ease-out-quart);
+  }
+
+  .hero__scroll-cue:hover {
+    color: var(--color-muted);
+  }
+
+  .hero__scroll-cue-line {
+    display: block;
+    width: 1px;
+    height: 2.5rem;
+    background: linear-gradient(
+      to bottom,
+      color-mix(in oklch, var(--color-primary) 90%, transparent),
+      transparent
+    );
+    transform-origin: top;
+    animation: cue-pulse 2.4s var(--ease-out-quart) infinite;
+  }
+
+  @keyframes cue-pulse {
+    0%,
+    100% {
+      transform: scaleY(0.55);
+      opacity: 0.5;
+    }
+    50% {
+      transform: scaleY(1);
+      opacity: 1;
+    }
+  }
+
+  .hero__kicker,
+  .hero__title,
+  .hero__lede,
+  .hero__actions,
+  .hero__hint,
+  .hero__meta,
+  .topbar,
+  .hero__scroll-cue {
+    animation: rise-in var(--duration-slow) var(--ease-out-expo) both;
+  }
+
+  .topbar {
+    animation-delay: 80ms;
+  }
+  .hero__kicker {
+    animation-delay: 160ms;
+  }
+  .hero__title {
+    animation-delay: 240ms;
+  }
+  .hero__lede {
+    animation-delay: 360ms;
+  }
+  .hero__actions {
+    animation-delay: 480ms;
+  }
+  .hero__hint {
+    animation-delay: 600ms;
+  }
+  .hero__meta {
+    animation-delay: 520ms;
+  }
+  .hero__scroll-cue {
+    animation-delay: 700ms;
+  }
+
+  @keyframes rise-in {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+      filter: blur(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+  }
+
+  /* ========== Story — editorial, no card stack ========== */
+  .story {
+    position: relative;
+    padding-bottom: 18vh;
+  }
+
+  .story__intro {
+    min-height: 70svh;
+    display: flex;
+    align-items: center;
+    padding: 10vh var(--page-pad);
+  }
+
+  .story__intro-inner {
+    max-width: 28rem;
+  }
+
+  .story__eyebrow {
+    margin: 0 0 var(--space-3);
+    font-size: var(--text-label);
+    font-weight: 500;
+    letter-spacing: var(--tracking-label);
+    color: var(--color-primary);
+  }
+
+  .story__intro-title {
+    margin: 0 0 var(--space-4);
+    font-family: var(--font-display);
+    font-size: clamp(2.1rem, 4.2vw, 3.15rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    text-wrap: balance;
+    color: var(--color-ink);
+  }
+
+  .story__intro-lede {
+    margin: 0;
+    color: var(--color-muted);
+    max-width: 34ch;
+    line-height: 1.7;
+    text-wrap: pretty;
+  }
+
+  .story__chapters {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .chapter {
+    /* Tall holds so the camera can rest on each part before moving */
+    min-height: 140svh;
+    display: flex;
+    align-items: center;
+    padding: 10vh var(--page-pad);
+    position: relative;
+  }
+
+  .chapter__layout {
+    width: 100%;
+    max-width: 72rem;
+    margin-inline: auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(1.5rem, 4vw, 4rem);
+    align-items: center;
+  }
+
+  .chapter--right .chapter__layout {
+    direction: rtl;
+  }
+
+  .chapter--right .chapter__copy {
+    direction: ltr;
+  }
+
+  .chapter__copy {
+    max-width: 26rem;
+    position: relative;
+    padding: clamp(1rem, 2vw, 1.35rem) clamp(0.9rem, 2vw, 1.25rem);
+    margin-inline: calc(clamp(0.75rem, 2vw, 1.25rem) * -1);
+    border-radius: calc(var(--radius-md) + 2px);
+    /* Soft wash so type stays readable without a heavy card */
+    background: linear-gradient(
+      90deg,
+      var(--chapter-wash) 0%,
+      color-mix(in oklch, var(--chapter-wash) 55%, transparent) 72%,
+      transparent 100%
+    );
+    border: 1px solid transparent;
+    box-shadow: none;
+    opacity: 0.4;
+    transform: translateY(28px);
+    filter: blur(0);
+    transition:
+      opacity 0.85s var(--ease-out-expo),
+      transform 0.85s var(--ease-out-expo),
+      box-shadow 0.5s var(--ease-out-quart),
+      border-color 0.5s var(--ease-out-quart);
+  }
+
+  .chapter--right .chapter__copy {
+    background: linear-gradient(
+      270deg,
+      var(--chapter-wash) 0%,
+      color-mix(in oklch, var(--chapter-wash) 55%, transparent) 72%,
+      transparent 100%
+    );
+  }
+
+
+  .chapter.is-active .chapter__copy {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .chapter.is-passed .chapter__copy {
+    opacity: 0.28;
+    transform: translateY(-12px);
+  }
+
+  .chapter__index {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    margin: 0 0 var(--space-4);
+  }
+
+  .chapter__index-num {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    color: var(--color-primary);
+  }
+
+  .chapter__index-rule {
+    flex: 1;
+    max-width: 3.5rem;
+    height: 1px;
+    background: var(--color-primary);
+    opacity: 0.55;
+    transform: scaleX(0.4);
+    transform-origin: left;
+    transition: transform 0.8s var(--ease-out-expo);
+  }
+
+  .chapter--right .chapter__index-rule {
+    transform-origin: right;
+  }
+
+  .chapter.is-active .chapter__index-rule {
+    transform: scaleX(1);
+  }
+
+  .chapter__title {
+    margin: 0 0 var(--space-4);
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 3vw, 2.35rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    text-wrap: balance;
+    color: var(--color-ink);
+  }
+
+  .chapter__body {
+    margin: 0 0 var(--space-5);
+    color: var(--color-muted);
+    font-size: clamp(1rem, 0.96rem + 0.2vw, 1.08rem);
+    line-height: 1.75;
+    max-width: 34ch;
+    text-wrap: pretty;
+  }
+
+  .chapter__detail {
+    margin: 0;
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--chapter-rule);
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
+    color: var(--color-faint);
+  }
+
+  .chapter__stage-gap {
+    min-height: 1px;
+  }
+
+  /* Large watermark index — atmosphere, not a card */
+  .chapter__copy::before {
+    content: attr(data-watermark);
+    position: absolute;
+    top: -0.4em;
+    left: -0.05em;
+    font-family: var(--font-display);
+    font-size: clamp(5rem, 12vw, 8rem);
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: var(--chapter-watermark);
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .chapter--right .chapter__copy::before {
+    left: auto;
+    right: -0.05em;
+  }
+
+  /* ========== Closing panels ========== */
+  .panel {
+    position: relative;
+    z-index: 2;
+    background: var(--color-bg);
+    border-top: 1px solid color-mix(in oklch, var(--color-ink) 8%, transparent);
+    padding: var(--space-9) var(--page-pad);
+  }
+
+  .panel--invite {
+    background: radial-gradient(
+      120% 80% at 20% 0%,
+      color-mix(in oklch, var(--color-surface) 90%, var(--color-primary)) 0%,
+      var(--color-bg) 55%
+    );
+  }
+
+  .panel__inner {
+    max-width: 40rem;
+  }
+
+  .panel__title {
+    margin: 0 0 var(--space-5);
+    font-family: var(--font-display);
+    font-size: var(--text-headline);
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+    line-height: 1.2;
+  }
+
+  .panel__body {
+    margin: 0 0 var(--space-4);
+    color: var(--color-muted);
+    max-width: 58ch;
+    text-wrap: pretty;
+  }
+
+  .panel--invite .btn {
+    margin-top: var(--space-5);
+  }
+
+  .site-footer {
+    position: relative;
+    z-index: 2;
+    padding: var(--space-6) var(--page-pad) var(--space-7);
+    border-top: 1px solid color-mix(in oklch, var(--color-ink) 6%, transparent);
+    color: var(--color-faint);
+    font-size: var(--text-label);
+    background: var(--color-bg);
+  }
+
+  .site-footer p {
+    margin: 0;
+  }
+
+  /* ========== Responsive ========== */
+  @media (max-width: 900px) {
+    .hero {
+      grid-template-columns: 1fr;
+      align-items: end;
+      padding-top: calc(var(--space-8) + 2rem);
+    }
+
+    .hero__meta {
+      justify-self: start;
+      width: min(100%, 22rem);
+      margin-bottom: 3.5rem;
+    }
+
+    .topbar__nav a:not(.topbar__cta) {
+      display: none;
+    }
+
+    .story-progress {
+      display: none;
+    }
+
+    .chapter__layout {
+      grid-template-columns: 1fr;
+    }
+
+    .chapter--right .chapter__layout {
+      direction: ltr;
+    }
+
+    .chapter {
+      min-height: 125svh;
+      align-items: flex-end;
+      padding-bottom: 14vh;
+    }
+
+    .chapter__stage-gap {
+      display: none;
+    }
+
+    .story__intro {
+      min-height: 55svh;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero__actions {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .btn {
+      width: 100%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero__kicker,
+    .hero__title,
+    .hero__lede,
+    .hero__actions,
+    .hero__hint,
+    .hero__meta,
+    .topbar,
+    .hero__scroll-cue {
+      animation: none;
+    }
+
+    .hero__hint,
+    .hero__scroll-cue-line {
+      display: none;
+    }
+
+    .btn--primary:hover {
+      transform: none;
+    }
+
+    .chapter__copy {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+
+    .chapter.is-passed .chapter__copy {
+      opacity: 1;
+      transform: none;
+    }
+
+    .chapter__index-rule {
+      transform: scaleX(1);
+    }
+  }
+</style>
+
+<script>
+  import type { WatchSceneHandle } from "../lib/watch-scene";
+
+  const canvas = document.getElementById("watch-canvas");
+  const experience = document.querySelector<HTMLElement>("[data-experience]");
+  const chapters = [
+    ...document.querySelectorAll<HTMLElement>("[data-chapter]"),
+  ];
+  const railItems = [
+    ...document.querySelectorAll<HTMLElement>("[data-rail-item]"),
+  ];
+  const progressFill = document.querySelector<HTMLElement>("[data-progress-fill]");
+  // Watermark numbers via data attr for CSS ::before
+  chapters.forEach((el) => {
+    const idx = el.querySelector(".chapter__index-num")?.textContent?.trim();
+    const copy = el.querySelector<HTMLElement>(".chapter__copy");
+    if (copy && idx) copy.dataset.watermark = idx;
+  });
+
+  if (!(canvas instanceof HTMLCanvasElement) || !experience) {
+    // still try Lenis for the rest of the page
+  }
+
+  const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const useLenis = !media.matches;
+
+  // --- Lenis ---
+  let lenis: { raf: (t: number) => void; destroy: () => void; on: (e: string, cb: (d: { scroll: number; limit: number; progress: number }) => void) => void } | null = null;
+
+  if (useLenis) {
+    const { default: Lenis } = await import("lenis");
+    lenis = new Lenis({
+      // Slightly slower — gives the orbit camera time to settle on each part
+      duration: 1.35,
+      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+      touchMultiplier: 1.05,
+      wheelMultiplier: 0.85,
+    });
+
+    const lenisLoop = (time: number) => {
+      lenis?.raf(time);
+      requestAnimationFrame(lenisLoop);
+    };
+    requestAnimationFrame(lenisLoop);
+  }
+
+  // --- Three scene ---
+  let scene: WatchSceneHandle | null = null;
+
+  if (canvas instanceof HTMLCanvasElement) {
+    const { createWatchScene } = await import("../lib/watch-scene");
+    scene = createWatchScene({
+      canvas,
+      reducedMotion: media.matches,
+    });
+  }
+
+  let activeChapter = -1;
+  let ticking = false;
+
+  /**
+   * Chapter-aware progress so camera shots lock to copy, not raw page height.
+   * 0–0.12  hero
+   * 0.12–0.92 four chapters (equal bands)
+   * 0.92–1   exit
+   */
+  function measureProgress() {
+    if (!experience) return 0;
+    if (!chapters.length) {
+      const rect = experience.getBoundingClientRect();
+      const total = experience.offsetHeight - window.innerHeight;
+      if (total <= 0) return 0;
+      return Math.min(1, Math.max(0, -rect.top / total));
+    }
+
+    const vh = window.innerHeight;
+    const mid = vh * 0.5;
+    const first = chapters[0].getBoundingClientRect();
+    const last = chapters[chapters.length - 1].getBoundingClientRect();
+
+    // Still in hero (first chapter hasn't reached mid)
+    if (first.top > mid) {
+      const t = 1 - Math.min(1, Math.max(0, (first.top - mid) / (vh * 0.9)));
+      return Math.min(0.12, t * 0.12);
+    }
+
+    // Past last chapter → exit
+    if (last.bottom < mid) {
+      const past = Math.min(1, (mid - last.bottom) / (vh * 0.8));
+      return 0.92 + past * 0.08;
+    }
+
+    // Inside chapters: find which band + local progress
+    for (let i = 0; i < chapters.length; i++) {
+      const r = chapters[i].getBoundingClientRect();
+      if (r.top <= mid && r.bottom > mid) {
+        const local = Math.min(1, Math.max(0, (mid - r.top) / Math.max(1, r.height)));
+        // Map chapter i local 0–1 into global 0.12–0.92
+        const band = 0.8 / chapters.length;
+        return 0.12 + i * band + local * band;
+      }
+    }
+
+    // Between chapters — nearest
+    let best = 0;
+    let bestDist = Infinity;
+    chapters.forEach((el, i) => {
+      const r = el.getBoundingClientRect();
+      const c = (r.top + r.bottom) / 2;
+      const d = Math.abs(c - mid);
+      if (d < bestDist) {
+        bestDist = d;
+        const band = 0.8 / chapters.length;
+        best = 0.12 + i * band + 0.5 * band;
+      }
+    });
+    return best;
+  }
+
+  function updateActiveChapter() {
+    const mid = window.innerHeight * 0.48;
+    let next = -1;
+
+    for (let i = 0; i < chapters.length; i++) {
+      const r = chapters[i].getBoundingClientRect();
+      if (r.top <= mid && r.bottom > mid) {
+        next = i;
+        break;
+      }
+    }
+
+    if (next === -1) {
+      let best = Infinity;
+      chapters.forEach((el, i) => {
+        const r = el.getBoundingClientRect();
+        const c = (r.top + r.bottom) / 2;
+        const d = Math.abs(c - mid);
+        if (d < best) {
+          best = d;
+          next = i;
+        }
+      });
+      const story = document.querySelector("[data-story]");
+      if (story) {
+        const sr = story.getBoundingClientRect();
+        if (sr.bottom < window.innerHeight * 0.15 || sr.top > window.innerHeight * 0.85) {
+          next = -1;
+        }
+      }
+      // Don't activate chapter while still clearly in hero
+      if (chapters[0] && chapters[0].getBoundingClientRect().top > mid) {
+        next = -1;
+      }
+    }
+
+    if (next !== activeChapter) {
+      activeChapter = next;
+      chapters.forEach((el, i) => {
+        el.classList.toggle("is-active", i === activeChapter);
+        el.classList.toggle("is-passed", activeChapter >= 0 && i < activeChapter);
+      });
+      railItems.forEach((el, i) => {
+        el.classList.toggle("is-active", i === activeChapter);
+        el.classList.toggle("is-passed", activeChapter >= 0 && i < activeChapter);
+      });
+
+      if (activeChapter >= 0) {
+        const align = chapters[activeChapter].dataset.align || "left";
+        experience?.setAttribute("data-align", align);
+      } else {
+        experience?.setAttribute("data-align", "left");
+      }
+
+      if (media.matches && activeChapter >= 0) {
+        scene?.setShotIndex(activeChapter + 1);
+      }
+    }
+
+    // Progress fill within story chapters only (transform, not height)
+    if (progressFill && chapters.length) {
+      const scale =
+        activeChapter < 0 ? 0 : (activeChapter + 0.5) / chapters.length;
+      progressFill.style.transform = `scaleY(${Math.min(1, Math.max(0, scale))})`;
+    }
+  }
+
+  function onFrame() {
+    ticking = false;
+    const t = measureProgress();
+    scene?.setScrollProgress(t);
+
+    let phase = "hero";
+    if (t > 0.1 && t < 0.92) phase = "story";
+    else if (t >= 0.92) phase = "exit";
+    experience?.setAttribute("data-phase", phase);
+
+    updateActiveChapter();
+  }
+
+  function requestTick() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(onFrame);
+  }
+
+  if (lenis) {
+    lenis.on("scroll", () => requestTick());
+  } else {
+    window.addEventListener("scroll", requestTick, { passive: true });
+  }
+  window.addEventListener("resize", requestTick, { passive: true });
+  requestTick();
+
+  const onMotionChange = () => {
+    scene?.setReducedMotion(media.matches);
+    requestTick();
+  };
+  if (typeof media.addEventListener === "function") {
+    media.addEventListener("change", onMotionChange);
+  } else {
+    media.addListener(onMotionChange);
+  }
+
+  window.addEventListener(
+    "pagehide",
+    () => {
+      scene?.dispose();
+      lenis?.destroy();
+      window.removeEventListener("scroll", requestTick);
+      window.removeEventListener("resize", requestTick);
+    },
+    { once: true },
+  );
+</script>
